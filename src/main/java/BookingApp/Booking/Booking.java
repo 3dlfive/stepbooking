@@ -1,8 +1,10 @@
 package BookingApp.Booking;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Booking<T> {
+public class Booking<T> implements Serializable {
+    static final long serialVersionUID = 1;
     private T flight;
     private String name;
     private String lastname;
@@ -45,5 +47,15 @@ public class Booking<T> {
 
     public void setTicketsAmount(int ticketsAmount) {
         this.ticketsAmount = ticketsAmount;
+    }
+
+    @Override
+    public String toString() {
+        return "Booking{" +
+                "flight=" + flight +
+                ", name='" + name + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", ticketsAmount=" + ticketsAmount +
+                '}';
     }
 }
