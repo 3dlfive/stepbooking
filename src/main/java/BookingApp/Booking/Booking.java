@@ -1,6 +1,9 @@
 package BookingApp.Booking;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.UUID;
@@ -11,6 +14,7 @@ public class Booking<T> implements Serializable {
     private String name;
     private String lastname;
     private int ticketsAmount;
+    private long bookingTime;
     private final String uniqueID = UUID.randomUUID().toString();
     public String getUniqueID() {
         return uniqueID;
@@ -18,11 +22,21 @@ public class Booking<T> implements Serializable {
 
 
 
+    public Booking(T flight, String name, String lastname, int ticketsAmount,String bookdate) {
+
+        this.setFlight(flight);
+        this.setName(name);
+        this.setLastname(lastname);
+        this.setTicketsAmount(ticketsAmount);
+        this.setBookingTime(bookdate);
+
+
+    }
     public Booking(T flight, String name, String lastname, int ticketsAmount) {
-        setFlight(flight);
-        setName(name);
-        setLastname(lastname);
-        setTicketsAmount(ticketsAmount);
+        this(flight,name,lastname,ticketsAmount,LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+    }
+    public Booking(T flight, String name, String lastname) {
+        this(flight,name,lastname,1,LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
     }
 
     public T getFlight() {
@@ -80,5 +94,14 @@ public class Booking<T> implements Serializable {
                 ", ticketsAmount=" + ticketsAmount +
                 ", uniqueID='" + uniqueID + '\'' +
                 '}';
+    }
+    public void setBookingTime(String year) {
+
+        LocalDate time = LocalDate.parse(year, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        ;
+        ZoneId zoneId = ZoneId.systemDefault(); // or: ZoneId.of("Europe/Oslo");
+        long epoch = time.toEpochDay();
+//      //20/03/2016
+        this.bookingTime = epoch;
     }
 }

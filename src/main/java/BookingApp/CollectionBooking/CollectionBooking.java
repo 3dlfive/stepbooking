@@ -5,7 +5,6 @@ import BookingApp.bookingDAO.BookingDao;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 public class CollectionBooking<T> implements Serializable, BookingDao {
