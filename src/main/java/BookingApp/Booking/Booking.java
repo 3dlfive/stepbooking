@@ -2,6 +2,8 @@ package BookingApp.Booking;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Objects;
+import java.util.UUID;
 
 public class Booking<T> implements Serializable {
     static final long serialVersionUID = 1;
@@ -9,6 +11,12 @@ public class Booking<T> implements Serializable {
     private String name;
     private String lastname;
     private int ticketsAmount;
+    private final String uniqueID = UUID.randomUUID().toString();
+    public String getUniqueID() {
+        return uniqueID;
+    }
+
+
 
     public Booking(T flight, String name, String lastname, int ticketsAmount) {
         setFlight(flight);
@@ -49,6 +57,20 @@ public class Booking<T> implements Serializable {
         this.ticketsAmount = ticketsAmount;
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Booking<?> booking = (Booking<?>) o;
+        return Objects.equals(uniqueID, booking.uniqueID);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(uniqueID);
+    }
+
     @Override
     public String toString() {
         return "Booking{" +
@@ -56,6 +78,7 @@ public class Booking<T> implements Serializable {
                 ", name='" + name + '\'' +
                 ", lastname='" + lastname + '\'' +
                 ", ticketsAmount=" + ticketsAmount +
+                ", uniqueID='" + uniqueID + '\'' +
                 '}';
     }
 }

@@ -1,14 +1,14 @@
 package BookingApp.bookingDAO;
 
 import BookingApp.Booking.Booking;
-import BookingApp.CollectionBooking.CollectionBooking;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 public interface BookingDao {
 
-CollectionBooking<Booking> getAllBookings();
-Booking getByID(int index);
+ArrayList<Booking> getAllBookings();
+    Optional<Booking> getByID(String uniqueID);
 Boolean deleate(Booking booking);
 Boolean save(Booking booking);
 ArrayList<Booking> loadData();
