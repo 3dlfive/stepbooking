@@ -1,4 +1,4 @@
-package BookingApp.service;
+package BookingApp.Controller;
 
 import java.io.Serializable;
 
