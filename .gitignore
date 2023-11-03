@@ -30,3 +30,4 @@ bin/
 
 ### DEV files ###
 bookingDB.bin
+/target
