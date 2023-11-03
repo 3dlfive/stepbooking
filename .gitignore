@@ -28,11 +28,7 @@ bin/
 ### Mac OS ###
 .DS_Store
 
-### DEV files ###
+
 bookingDB.bin
 /target
 .idea/
-/.idea/
-*.iml
-/docker/pgdata/
-node_modules/
