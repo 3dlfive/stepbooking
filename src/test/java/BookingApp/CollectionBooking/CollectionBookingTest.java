@@ -65,5 +65,15 @@ class CollectionBookingTest {
         boolean isAded = bookcolection.smartAdd(case5);
         assertTrue(isAded);
     }
+    @Test
+    void deleteByID(){
+        int sizebefore = bookcolection.countBookings();
+        bookcolection.deleateByUID(case5.getUniqueID());
+        assertNotEquals(sizebefore,bookcolection.countBookings());
+    }
+    @Test
+    void countBookings(){
+        assertEquals(bookcolection.countBookings(),5);
+    }
 
 }

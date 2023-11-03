@@ -15,10 +15,14 @@ public class CollectionBooking<T> implements Serializable, BookingDao {
     @Serial
     private static final long serialVersionUID = 1;
 
+    public void setDb(ArrayList<Booking> db) {
+        this.db = db;
+    }
+
     private ArrayList<Booking> db = new ArrayList<>();
 
     public CollectionBooking(ArrayList<Booking> db) {
-        this.db = db;
+        setDb(db);
     }
 
 
@@ -36,6 +40,17 @@ public class CollectionBooking<T> implements Serializable, BookingDao {
     public Boolean deleate(Booking booking) {
 
         return this.db.remove(booking);
+    }
+    public int countBookings(){
+        return this.db.size();
+    }
+    @Override
+    public Boolean deleateByUID(String uid) {
+        List<Booking> templist = this.db.stream().filter(el->el.getUniqueID().equals(uid)).toList();
+        ArrayList<Booking> templ = new ArrayList<>(templist);
+        setDb(templ);
+        saveToFile(templ);
+        return null;
     }
 
     @Override
