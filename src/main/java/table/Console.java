@@ -1,7 +1,9 @@
+package table;
+
 import java.util.Scanner;
 
 public class Console {
-    private static Scanner in = new Scanner(System.in);
+    private static final Scanner in = new Scanner(System.in);
 
     public static void TellHim(String string){
         System.out.println(string);
