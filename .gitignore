@@ -31,3 +31,4 @@ bin/
 
 bookingDB.bin
 /target
+.idea/
