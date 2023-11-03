@@ -14,12 +14,13 @@ import java.util.stream.Collectors;
 public class CollectionBooking<T> implements Serializable, BookingDao {
     @Serial
     private static final long serialVersionUID = 1;
+    private ArrayList<Booking> db = new ArrayList<>();
 
     public void setDb(ArrayList<Booking> db) {
         this.db = db;
     }
 
-    private ArrayList<Booking> db = new ArrayList<>();
+
 
     public CollectionBooking(ArrayList<Booking> db) {
         setDb(db);
@@ -34,6 +35,10 @@ public class CollectionBooking<T> implements Serializable, BookingDao {
     @Override
     public Optional<Booking> getByID(String uniqueID) {
         return this.db.stream().filter(el->el.getUniqueID().equals(uniqueID)).findFirst();
+    }
+    public List<Booking> getByLastname(String lastname) {
+        List<Booking> ll = this.db.stream().filter(el->el.getLastname().equals(lastname)).toList();
+        return ll;
     }
 
     @Override

@@ -16,7 +16,7 @@ class CollectionBookingTest {
     Booking case4;
     Booking case5;   
     Booking case6;
-
+    Booking case7;
     ArrayList<Booking> blist = new ArrayList<>();
     ;CollectionBooking<Booking> bookcolection;
     @BeforeEach
@@ -28,6 +28,7 @@ class CollectionBookingTest {
         case4 = new Booking<>(new Object(),"Morrel","Brimmer",3);
         case5 = new Booking<>(new Object(),"Korri","Ofarrell",5);
         case6 = new Booking<>(new Object(),"Hagen","Finke",3);
+        case7 = new Booking<>(new Object(),"Hagena","Finke",13);
         blist.add(case1);
         blist.add(case2);
         blist.add(case3);
@@ -80,6 +81,14 @@ class CollectionBookingTest {
     @Test
     void countBookings(){
         assertEquals(bookcolection.countBookings(),5);
+    }
+    @Test
+    void getByLastname(){
+
+
+        System.out.println(bookcolection.getByLastname("Hendricks"));
+        System.out.println("Finish");
+
     }
 
 }
