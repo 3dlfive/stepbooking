@@ -48,15 +48,12 @@ public class CollectionBooking<T> implements Serializable, BookingDao {
         }else {
 
             boolean isadded = this.db.add(booking);
-            save(booking);
+            saveToFile(db);
             return  isadded;
         }
     }
 
-    @Override
-    public Boolean save(Booking booking) {
-        return null;
-    }
+
     public void saveToFile(ArrayList<Booking> list){
         try (ObjectOutputStream outputStream = new ObjectOutputStream(
                 new FileOutputStream("bookingDB.bin")

@@ -12,7 +12,5 @@ ArrayList<Booking> getAllBookings();
 Boolean deleate(Booking booking);
 
 Boolean smartAdd(Booking booking);
-
-Boolean save(Booking booking);
 ArrayList<Booking> loadData();
 }
