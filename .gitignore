@@ -31,3 +31,7 @@ bin/
 ### DEV files ###
 bookingDB.bin
 /target
+.idea/
+*.iml
+/docker/pgdata/
+node_modules/
