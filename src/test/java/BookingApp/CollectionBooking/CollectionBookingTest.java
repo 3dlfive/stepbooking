@@ -72,6 +72,12 @@ class CollectionBookingTest {
         assertNotEquals(sizebefore,bookcolection.countBookings());
     }
     @Test
+    void deletebyBooking(){
+        int sizebefore = bookcolection.countBookings();
+        bookcolection.deleate(case2);
+        assertNotEquals(sizebefore,bookcolection.countBookings());
+    }
+    @Test
     void countBookings(){
         assertEquals(bookcolection.countBookings(),5);
     }
