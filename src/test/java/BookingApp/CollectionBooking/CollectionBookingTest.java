@@ -49,4 +49,11 @@ class CollectionBookingTest {
         assertEquals(case2.toString(),searchitem.get().toString());
 
     }
+    @Test
+    void optionalEmpty() {
+        String id = case2.getUniqueID();
+        Optional<Booking> searchitem = bookcolection.getByID("id");
+        System.out.println(searchitem);
+        assertEquals(true,searchitem.isEmpty());
+    }
 }
