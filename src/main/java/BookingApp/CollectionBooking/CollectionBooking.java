@@ -50,7 +50,7 @@ public class CollectionBooking<T> implements Serializable, BookingDao {
         ArrayList<Booking> templ = new ArrayList<>(templist);
         setDb(templ);
         saveToFile(templ);
-        return null;
+        return getByID(uid).isPresent();
     }
 
     @Override
