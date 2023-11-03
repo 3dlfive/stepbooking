@@ -5,7 +5,9 @@ import BookingApp.bookingDAO.BookingDao;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class CollectionBooking<T> implements Serializable, BookingDao {
     @Serial
@@ -33,7 +35,20 @@ public class CollectionBooking<T> implements Serializable, BookingDao {
 
         return this.db.remove(booking);
     }
+    @Override
+    public Boolean smartAdd(Booking booking){
+        if(db.contains(booking)){
+            List<Booking> templist = db.stream().map(el -> el.equals(booking) ? booking : el).toList();
+            ArrayList<Booking> templ = new ArrayList<>(templist);
+            saveToFile(templ);
+            return true;
+        }else {
 
+            boolean isadded = this.db.add(booking);
+            save(booking);
+            return  isadded;
+        }
+    }
     @Override
     public Boolean save(Booking booking) {
         return null;
@@ -53,8 +68,6 @@ public class CollectionBooking<T> implements Serializable, BookingDao {
 
     @Override
     public ArrayList<Booking> loadData() {
-        System.out.println("Load data");
-
         ArrayList<Booking> bookingList = null;
 
         try (ObjectInputStream inputStream = new ObjectInputStream(
