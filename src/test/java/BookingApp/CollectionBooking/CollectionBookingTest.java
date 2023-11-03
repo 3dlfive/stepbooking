@@ -14,7 +14,9 @@ class CollectionBookingTest {
     Booking case2;
     Booking case3;
     Booking case4;
-    Booking case5;   Booking case6;
+    Booking case5;   
+    Booking case6;
+
     ArrayList<Booking> blist = new ArrayList<>();
     ;CollectionBooking<Booking> bookcolection;
     @BeforeEach
@@ -31,6 +33,7 @@ class CollectionBookingTest {
         blist.add(case3);
         blist.add(case4);
         blist.add(case5);
+
         bookcolection = new CollectionBooking<>(blist);
     }
     @Test
@@ -62,4 +65,5 @@ class CollectionBookingTest {
         boolean isAded = bookcolection.smartAdd(case5);
         assertTrue(isAded);
     }
+
 }
