@@ -1,0 +1,9 @@
+.idea/
+*.iml
+target/
+out/
+.DS_Store
+/docker/pgdata/
+node_modules/
+
+
