@@ -10,7 +10,7 @@ import java.util.UUID;
 
 public class Booking<T> implements Serializable {
     static final long serialVersionUID = 1;
-    private T flight;
+    private transient T flight;
     private String name;
     private String lastname;
     private int ticketsAmount;

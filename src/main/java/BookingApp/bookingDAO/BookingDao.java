@@ -10,6 +10,8 @@ public interface BookingDao {
 ArrayList<Booking> getAllBookings();
     Optional<Booking> getByID(String uniqueID);
 Boolean deleate(Booking booking);
-Boolean save(Booking booking);
+Boolean deleateByUID(String uid);
+
+Boolean smartAdd(Booking booking);
 ArrayList<Booking> loadData();
 }
