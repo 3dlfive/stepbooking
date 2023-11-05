@@ -25,7 +25,7 @@ public class Logger {
         sb.append("\n").append(timeStr).append(mode).append(message);
         try (RandomAccessFile file = new RandomAccessFile("application.log", "rw");
              FileChannel channel = file.getChannel();) {
-            System.out.println("Good");
+
             file.seek(file.length() - 1);
             ByteBuffer buffer = ByteBuffer.wrap(sb.toString().getBytes());
             channel.write(buffer);
