@@ -34,6 +34,15 @@ public class ServiceFlight {
             ));
         }
     }
+    // пошук рейсів за місцем призначення, датою і кількістю місць, яку треба забронювати
+    public ArrayList<Flight> getSpecific(Airport dest, LocalDate date, int places) {
+        ArrayList<Flight> list = new ArrayList<>(
+                db.getAll().stream()
+                .filter(x -> x.getDestination() == dest && x.getDate()==date && x.getEmptySeats() >= places)
+                .toList()
+        );
+        return list;
+    }
     public ArrayList<Flight> getAll(){
         return db.getAll();
     }

@@ -3,8 +3,13 @@ package Flights.Flight;
 import Flights.Enums.Airline;
 import Flights.Enums.Airport;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class Flight{
     private int flightID;
@@ -22,6 +27,8 @@ public class Flight{
         this.emptySeats = emptySeats;
         this.time = time;
     }
+
+    public Flight(){};
 
     public int getFlightID() {
         return flightID;
@@ -82,10 +89,41 @@ public class Flight{
                 "}");
     }
 
-    //public serialize(){
-    //
-    //}
-    //public deserialize(){
-    //
-    //}
+    public String serialize(){
+
+        StringBuffer sb = new StringBuffer();
+        sb.append(this.flightID);
+        sb.append(";");
+        sb.append(this.date.getYear());
+        sb.append("/");
+        sb.append(this.date.getMonthValue());
+        sb.append("/");
+        sb.append(this.date.getDayOfMonth());
+        sb.append(";");
+        sb.append(this.destination);
+        sb.append(";");
+        sb.append(this.airline);
+        sb.append(";");
+        sb.append(this.emptySeats);
+        sb.append(";");
+        sb.append(this.time.getHour());
+        sb.append("/");
+        sb.append(this.time.getMinute());
+
+        return sb.toString();
+    }
+    public static Flight deserialize(String in){
+        ArrayList<String> parts = new ArrayList<>(List.of(in.split(";")));
+        ArrayList<String> date = new ArrayList<>(List.of(parts.get(1).split("/")));
+        ArrayList<String> time = new ArrayList<>(List.of(parts.get(5).split("/")));
+        Flight flight = new Flight(
+                Integer.parseInt(parts.get(0)),
+                LocalDate.of(Integer.parseInt(date.get(0)), Integer.parseInt(date.get(1)), Integer.parseInt(date.get(2))),
+                Airport.valueOf(parts.get(2)),
+                Airline.valueOf(parts.get(3)),
+                Integer.parseInt(parts.get(4)),
+                LocalTime.of( Integer.parseInt(time.get(0)), Integer.parseInt(time.get(1)) )
+        );
+        return flight;
+    }
 }
