@@ -35,3 +35,4 @@ bookingDB.bin
 *.iml
 /docker/pgdata/
 node_modules/
+target/
