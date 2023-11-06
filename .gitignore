@@ -36,3 +36,5 @@ bookingDB.bin
 /docker/pgdata/
 node_modules/
 target/
+*.bin
+*.log
