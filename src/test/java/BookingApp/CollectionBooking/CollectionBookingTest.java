@@ -1,6 +1,10 @@
 package BookingApp.CollectionBooking;
 
 import BookingApp.Booking.Booking;
+import Flights.CollectionFlightDAO.CollectionFlightDAO;
+import Flights.ControllerFlight.ControllerFlight;
+import Flights.Flight.Flight;
+import Flights.ServiceFlight.ServiceFlight;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,25 +14,27 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CollectionBookingTest {
-    Booking case1;
-    Booking case2;
-    Booking case3;
-    Booking case4;
-    Booking case5;   
-    Booking case6;
-    Booking case7;
-    ArrayList<Booking> blist = new ArrayList<>();
-    ;CollectionBooking<Booking> bookcolection;
+    Booking<Flight>  case1;
+    Booking<Flight>  case2;
+    Booking<Flight>  case3;
+    Booking<Flight>  case4;
+    Booking<Flight>  case5;
+    Booking<Flight>  case6;
+    Booking<Flight>  case7;
+    ArrayList<Booking<Flight> > blist = new ArrayList<>();
+    CollectionBooking<Booking<Flight> > bookcolection;
     @BeforeEach
 
     void setup(){
-        case1 = new Booking<>(new Object(),"Benita","Bradberry",5);
-        case2 = new Booking<>(new Object(),"Vera","Hendricks",2);
-        case3 = new Booking<>(new Object(),"Keturah","Persons",3);
-        case4 = new Booking<>(new Object(),"Morrel","Brimmer",3);
-        case5 = new Booking<>(new Object(),"Korri","Ofarrell",5);
-        case6 = new Booking<>(new Object(),"Hagen","Finke",3);
-        case7 = new Booking<>(new Object(),"Hagena","Finke",13);
+        ControllerFlight fc = new ControllerFlight(new ServiceFlight(new CollectionFlightDAO(new ArrayList<>())));
+        fc.generateFlights(15);
+        case1 = new Booking<>(fc.getByID(0),"Benita","Bradberry",5);
+        case2 = new Booking<>(fc.getByID(1),"Vera","Hendricks",2);
+        case3 = new Booking<>(fc.getByID(2),"Keturah","Persons",3);
+        case4 = new Booking<>(fc.getByID(3),"Morrel","Brimmer",3);
+        case5 = new Booking<>(fc.getByID(4),"Korri","Ofarrell",5);
+        case6 = new Booking<>(fc.getByID(5),"Hagen","Finke",3);
+        case7 = new Booking<>(fc.getByID(6),"Hagena","Finke",13);
         blist.add(case1);
         blist.add(case2);
         blist.add(case3);
@@ -39,7 +45,7 @@ class CollectionBookingTest {
     }
     @Test
     void getAllBookings() {
-        ArrayList<Booking> result = bookcolection.getAllBookings();
+        ArrayList<Booking<Flight>> result = bookcolection.getAllBookings();
         System.out.println(result);
        assertEquals(result,result);
     }
@@ -49,7 +55,7 @@ class CollectionBookingTest {
     @Test
     void getByID() {
         String id = case2.getUniqueID();
-        Optional<Booking> searchitem = bookcolection.getByID(id);
+        Optional<Booking<Flight>> searchitem = bookcolection.getByID(id);
         System.out.println(searchitem);
         assertEquals(case2.toString(),searchitem.get().toString());
 
@@ -57,7 +63,7 @@ class CollectionBookingTest {
     @Test
     void optionalEmpty() {
         String id = case2.getUniqueID();
-        Optional<Booking> searchitem = bookcolection.getByID("id");
+        Optional<Booking<Flight>> searchitem = bookcolection.getByID("id");
         System.out.println(searchitem);
         assertEquals(true,searchitem.isEmpty());
     }

@@ -1,25 +1,35 @@
 package BookingApp.Booking;
 
+import Flights.CollectionFlightDAO.CollectionFlightDAO;
+import Flights.ControllerFlight.ControllerFlight;
+import Flights.Flight.Flight;
+import Flights.ServiceFlight.ServiceFlight;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class BookingTest {
-    Booking case1;
-    Booking case2;
-    Booking case3;
-    Booking case4;
-    Booking case5;
+    Booking<Flight> case1;
+    Booking<Flight> case2;
+    Booking<Flight> case3;
+    Booking<Flight> case4;
+    Booking<Flight> case5;
     @BeforeEach
 
     void setup(){
-        case1 = new Booking<>(new Object(),"Benita","Bradberry",5);
-        case2 = new Booking<>(new Object(),"Vera","Hendricks",2);
-        case3 = new Booking<>(new Object(),"Keturah","Persons",3);
-        case4 = new Booking<>(new Object(),"Morrel","Brimmer",3);
-        case5 = new Booking<>(new Object(),"Korri","Ofarrell",5);
+        ControllerFlight fc = new ControllerFlight(new ServiceFlight(new CollectionFlightDAO(new ArrayList<>())));
+        fc.generateFlights(15);
+
+        case1 = new Booking<>(fc.getByID(1),"Benita","Bradberry",5);
+        case2 = new Booking<>(fc.getByID(2),"Vera","Hendricks",2);
+        case3 = new Booking<>(fc.getByID(3),"Keturah","Persons",3);
+        case4 = new Booking<>(fc.getByID(4),"Morrel","Brimmer",3);
+        case5 = new Booking<>(fc.getByID(5),"Korri","Ofarrell",5);
     }
     @Test
     @DisplayName("Test that to object have diffrent UID")
@@ -68,7 +78,7 @@ class BookingTest {
     @Test
 
     void testNotEquals() {
-        assertFalse(case1.equals(case2));
+        assertNotEquals(case1, case2);
     }
 
 }

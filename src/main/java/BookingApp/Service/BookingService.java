@@ -2,6 +2,7 @@ package BookingApp.Service;
 
 import BookingApp.Booking.Booking;
 import BookingApp.CollectionBooking.CollectionBooking;
+import Flights.Flight.Flight;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -9,35 +10,35 @@ import java.util.List;
 import java.util.Optional;
 
 public class BookingService implements Serializable {
-    private CollectionBooking<ArrayList<Booking>> service = new CollectionBooking<>(new ArrayList<>());
+    private CollectionBooking<ArrayList<Booking<Flight> >> service = new CollectionBooking<>(new ArrayList<>());
     static final long serialVersionUID = 1;
 
-    public BookingService(CollectionBooking<ArrayList<Booking>> serviceArg) {
+    public BookingService(CollectionBooking<ArrayList<Booking<Flight> >> serviceArg) {
         setService(serviceArg);
     }
 
     public BookingService() {
-        setService(new CollectionBooking<>(new ArrayList<Booking>()));
-        ;
+        setService(new CollectionBooking<>(new ArrayList<Booking<Flight> >()));
+
     }
 
-    public void setService(CollectionBooking<ArrayList<Booking>> service) {
+    public void setService(CollectionBooking<ArrayList<Booking<Flight> >> service) {
         this.service = service;
     }
 
-    public ArrayList<Booking> getall() {
+    public ArrayList<Booking<Flight> > getall() {
         return service.getAllBookings();
     }
 
-    public Optional<Booking> findById(String id) {
+    public Optional<Booking<Flight> > findById(String id) {
         return service.getByID(id);
     }
 
-    public List<Booking> findByLastName(String ln) {
+    public List<Booking<Flight> > findByLastName(String ln) {
         return service.getByLastname(ln);
     }
 
-    public boolean dropByClass(Booking booking) {
+    public boolean dropByClass(Booking<Flight>  booking) {
         //delete by class
         return service.deleate(booking);
     }
@@ -50,11 +51,11 @@ public class BookingService implements Serializable {
         return service.countBookings();
     }
 
-    public boolean save(Booking booking) {
+    public boolean save(Booking<Flight>  booking) {
         return service.smartAdd(booking);
     }
 
-    public ArrayList<Booking> loadData() {
+    public ArrayList<Booking<Flight> > loadData() {
         return service.loadData();
     }
 
