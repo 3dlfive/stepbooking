@@ -2,6 +2,7 @@ package BookingApp.CollectionBooking;
 
 import BookingApp.Booking.Booking;
 import BookingApp.bookingDAO.BookingDao;
+import Flights.Flight.Flight;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -14,35 +15,35 @@ import java.util.stream.Collectors;
 public class CollectionBooking<T> implements Serializable, BookingDao {
     @Serial
     private static final long serialVersionUID = 1;
-    private ArrayList<Booking> db = new ArrayList<>();
+    private ArrayList<Booking<Flight>> db = new ArrayList<>();
 
-    public void setDb(ArrayList<Booking> db) {
+    public void setDb(ArrayList<Booking<Flight> > db) {
         this.db = db;
     }
 
 
 
-    public CollectionBooking(ArrayList<Booking> db) {
+    public CollectionBooking(ArrayList<Booking<Flight> > db) {
         setDb(db);
     }
 
 
     @Override
-    public ArrayList<Booking>  getAllBookings() {
+    public ArrayList<Booking<Flight> >  getAllBookings() {
         return this.db;
     }
 
     @Override
-    public Optional<Booking> getByID(String uniqueID) {
+    public Optional<Booking<Flight> > getByID(String uniqueID) {
         return this.db.stream().filter(el->el.getUniqueID().equals(uniqueID)).findFirst();
     }
-    public List<Booking> getByLastname(String lastname) {
-        List<Booking> ll = this.db.stream().filter(el->el.getLastname().equals(lastname)).toList();
+    public List<Booking<Flight> > getByLastname(String lastname) {
+        List<Booking<Flight> > ll = this.db.stream().filter(el->el.getLastname().equals(lastname)).toList();
         return ll;
     }
 
     @Override
-    public Boolean deleate(Booking booking) {
+    public Boolean deleate(Booking<Flight>  booking) {
 
         return this.db.remove(booking);
     }
@@ -51,18 +52,18 @@ public class CollectionBooking<T> implements Serializable, BookingDao {
     }
     @Override
     public Boolean deleateByUID(String uid) {
-        List<Booking> templist = this.db.stream().filter(el->el.getUniqueID().equals(uid)).toList();
-        ArrayList<Booking> templ = new ArrayList<>(templist);
+        List<Booking<Flight> > templist = this.db.stream().filter(el->el.getUniqueID().equals(uid)).toList();
+        ArrayList<Booking<Flight> > templ = new ArrayList<>(templist);
         setDb(templ);
         saveToFile(templ);
         return getByID(uid).isPresent();
     }
 
     @Override
-    public Boolean smartAdd(Booking booking){
+    public Boolean smartAdd(Booking<Flight>  booking){
         if(db.contains(booking)){
-            List<Booking> templist = db.stream().map(el -> el.equals(booking) ? booking : el).toList();
-            ArrayList<Booking> templ = new ArrayList<>(templist);
+            List<Booking<Flight>> templist = db.stream().map(el -> el.equals(booking) ? booking : el).toList();
+            ArrayList<Booking<Flight>> templ = new ArrayList<>(templist);
             saveToFile(templ);
             return true;
         }else {
@@ -74,7 +75,7 @@ public class CollectionBooking<T> implements Serializable, BookingDao {
     }
 
 
-    public void saveToFile(ArrayList<Booking> list){
+    public void saveToFile(ArrayList<Booking<Flight> > list){
         try (ObjectOutputStream outputStream = new ObjectOutputStream(
                 new FileOutputStream("bookingDB.bin")
         )) {
@@ -88,14 +89,14 @@ public class CollectionBooking<T> implements Serializable, BookingDao {
     }
 
     @Override
-    public ArrayList<Booking> loadData() {
+    public ArrayList<Booking<Flight> > loadData() {
 
-        ArrayList<Booking> bookingList = null;
+        ArrayList<Booking<Flight> > bookingList = null;
 
         try (ObjectInputStream inputStream = new ObjectInputStream(
                 new FileInputStream("bookingDB.bin")
         )) {
-            bookingList = (ArrayList<Booking>) inputStream.readObject();
+            bookingList = (ArrayList<Booking<Flight> >) inputStream.readObject();
 
             System.out.println(bookingList);
         } catch (FileNotFoundException e) {
