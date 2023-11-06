@@ -92,6 +92,7 @@ public class Booking<T> implements Serializable {
                 ", name='" + name + '\'' +
                 ", lastname='" + lastname + '\'' +
                 ", ticketsAmount=" + ticketsAmount +
+                ", bookingTime=" + LocalDate.ofEpochDay(this.bookingTime).format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) +
                 ", uniqueID='" + uniqueID + '\'' +
                 '}';
     }
