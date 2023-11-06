@@ -19,9 +19,8 @@ public class CollectionFlightDAO implements FlightDao {
 
     @Override
     public Flight getByID(int id) {
-        return flights.get(id);
+        return flights.stream().filter(x -> x.getFlightID() == id).toList().get(0);
     }
-
     @Override
     public void add(Flight flight) {
         flights.add(flight);
