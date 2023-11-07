@@ -3,12 +3,14 @@ package CustomLogger;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Logger {
+public class Logger implements Serializable {
+    static final long serialVersionUID = 1;
     public void info(String parametr) {
 
         String callerMethodName = getCallerMethodName();
@@ -23,6 +25,9 @@ public class Logger {
     }
 
     public void error(String parametr) {
+        String callerMethodName = getCallerMethodName();
+        saveLogs(callerMethodName + " exeption . Parametr is " + parametr, " [ERROR] ");
+    }        public void error(int parametr) {
         String callerMethodName = getCallerMethodName();
         saveLogs(callerMethodName + " exeption . Parametr is " + parametr, " [ERROR] ");
     }    public void error() {

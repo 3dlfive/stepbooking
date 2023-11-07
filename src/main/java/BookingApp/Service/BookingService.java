@@ -59,7 +59,11 @@ public class BookingService implements Serializable {
         return service.loadData();
     }
 
-
+    public boolean dropPassenger(String UID,String name, String lName){
+        return service.dropPassenger(UID,name,lName);
+    }    public boolean addPassenger(String UID,String name, String lName){
+        return service.addPassenger(UID,name,lName);
+    }
 
 
 }

@@ -113,4 +113,26 @@ public class CollectionBooking<T> implements Serializable, BookingDao {
 
         return bookingList;
     }
+    public boolean addPassenger(String UID,String Name, String LastName) throws PassengersMoreThenTicketsException{
+        Optional<Booking<Flight> > bookingThatWeLookingFor=  this.getByID(UID);
+
+        if (bookingThatWeLookingFor.isPresent()){
+            if (bookingThatWeLookingFor.get().getPl().getSize() > bookingThatWeLookingFor.get().getTicketsAmount()) throw new PassengersMoreThenTicketsException(String.format("Ви хочете додати пассажира але квитків тільки %S",bookingThatWeLookingFor.get().getTicketsAmount()),bookingThatWeLookingFor.get().getTicketsAmount());
+            bookingThatWeLookingFor.get().addPasenger(Name,LastName);
+           this.smartAdd(bookingThatWeLookingFor.get());
+           return true;
+        } else {
+            return false;
+        }
+    }
+    public boolean dropPassenger(String UID,String name, String lName) {
+        Optional<Booking<Flight> > bookingThatWeLookingFor=  this.getByID(UID);
+        if (bookingThatWeLookingFor.isPresent()){
+            bookingThatWeLookingFor.get().removePasenger(name,lName);
+           this.smartAdd(bookingThatWeLookingFor.get());
+           return true;
+        } else {
+            return false;
+        }
+    }
 }

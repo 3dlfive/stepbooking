@@ -1,10 +1,13 @@
 package BookingApp.Booking;
 
+import BookingApp.Controller.BookingController;
+import BookingApp.Passenger.Passengers;
+import Flights.Flight.Flight;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -12,6 +15,21 @@ public class Booking<T> implements Serializable {
     static final long serialVersionUID = 1;
     private transient T flight;
     private String name;
+
+    public Booking(T flight,String name, String lastname, int ticketsAmount,Passengers passengers) {
+        this(flight,name,lastname,ticketsAmount,LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),passengers);
+    }
+
+    public void setPl(Passengers pl) {
+        this.pl = pl;
+    }
+
+    public Passengers getPl() {
+        return pl;
+    }
+
+    private Passengers pl = new Passengers();
+
     private String lastname;
     private int ticketsAmount;
     private long bookingTime;
@@ -22,21 +40,23 @@ public class Booking<T> implements Serializable {
 
 
 
-    public Booking(T flight, String name, String lastname, int ticketsAmount,String bookdate) {
+    public Booking(T flight, String name, String lastname, int ticketsAmount,String bookdate,Passengers passengers) {
 
         this.setFlight(flight);
         this.setName(name);
         this.setLastname(lastname);
         this.setTicketsAmount(ticketsAmount);
         this.setBookingTime(bookdate);
+        this.setPl(passengers);
+        this.pl.add(name,lastname);
 
 
     }
     public Booking(T flight, String name, String lastname, int ticketsAmount) {
-        this(flight,name,lastname,ticketsAmount,LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        this(flight,name,lastname,ticketsAmount,LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),new Passengers(name,lastname));
     }
     public Booking(T flight, String name, String lastname) {
-        this(flight,name,lastname,1,LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        this(flight,name,lastname,1,LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),new Passengers(name,lastname));
     }
 
     public T getFlight() {
@@ -94,6 +114,7 @@ public class Booking<T> implements Serializable {
                 ", ticketsAmount=" + ticketsAmount +
                 ", bookingTime=" + LocalDate.ofEpochDay(this.bookingTime).format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) +
                 ", uniqueID='" + uniqueID + '\'' +
+                ", " + this.getPl() + '\'' +
                 '}';
     }
     public void setBookingTime(String year) {
@@ -105,4 +126,13 @@ public class Booking<T> implements Serializable {
 //      //20/03/2016
         this.bookingTime = epoch;
     }
+    public Booking<T> addPasenger(String n, String ln){
+        pl.add(n,ln);
+        return this;
+    }
+    public Booking<T> removePasenger(String n, String ln){
+        pl.drop(n,ln);
+        return this;
+    }
+
 }
