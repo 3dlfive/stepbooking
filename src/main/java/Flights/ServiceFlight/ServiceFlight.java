@@ -38,7 +38,7 @@ public class ServiceFlight {
     public ArrayList<Flight> getSpecific(Airport dest, LocalDate date, int places) {
         ArrayList<Flight> list = new ArrayList<>(
                 db.getAll().stream()
-                .filter(x -> x.getDestination() == dest && x.getDate()==date && x.getEmptySeats() >= places)
+                .filter(x -> (x.getDestination() == dest) && (x.getDate().equals(date)) && (x.getEmptySeats() >= places))
                 .toList()
         );
         return list;

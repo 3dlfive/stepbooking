@@ -109,13 +109,13 @@ class FlightTest {
                 220,
                 LocalTime.of(12, 30)
         );
-        String expected = "1;1990/10/1;Augsburg;ACA;220;12/30";
+        String expected = "1 1990/10/1 Augsburg ACA 220 12/30";
         assertEquals(expected, f.serialize());
     }
 
     @Test
     void deserialize() {
-        String in = "1;1990/10/1;Augsburg;ACA;220;12/30";
+        String in = "1 1990/10/1 Augsburg ACA 220 12/30";
 
         Flight expected = new Flight(
                 1,
