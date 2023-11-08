@@ -42,7 +42,22 @@ class PassengersTest {
     })
     void ifInList(String  nameOrLastname,boolean expectedResult) {
 
-        assertEquals(passangers.ifInList(nameOrLastname),expectedResult);
+        assertEquals(passangers.ifInListAny(nameOrLastname),expectedResult);
+    }
+    @ParameterizedTest(name="{0} = {1} = {2}")
+    @DisplayName("Check inlist method.")
+    @CsvSource({
+            "John,Doe,true",
+            "Jessica,Marraci,true",
+            "Brune,Smith,true",
+            "Brune,Marraci,false",
+            "Doe,John,false",
+            "Smith,John,false",
+
+    })
+    void ifInListNameandLname(String  name, String lname,boolean expectedResult) {
+
+        assertEquals(passangers.ifInListNameandLname(name,lname),expectedResult);
     }
 
 }

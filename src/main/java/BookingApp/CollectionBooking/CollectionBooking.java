@@ -133,7 +133,7 @@ public class CollectionBooking<T> implements Serializable, BookingDao {
     public boolean dropPassenger(String UID,String name, String lName) {
         Optional<Booking<Flight> > bookingThatWeLookingFor=  this.getByID(UID);
         if (bookingThatWeLookingFor.isPresent()){
-            bookingThatWeLookingFor.get().removePasenger(name,lName);
+           bookingThatWeLookingFor.get().removePasenger(name,lName);
            this.smartAdd(bookingThatWeLookingFor.get());
            return true;
         } else {

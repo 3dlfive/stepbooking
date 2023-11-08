@@ -65,11 +65,13 @@ public class Passengers implements Serializable {
     public  int getSize(){
         return passengerslist.size();
     }
-    public  boolean ifInList(String nameOrLastname){
+    public  boolean ifInListAny(String nameOrLastname){
         Predicate<Passenger> startPredicate = el -> (el.getLastname().equals(nameOrLastname)||el.getName().equals(nameOrLastname));
-
         return passengerslist.stream().anyMatch(startPredicate);
-
+    }
+    public  boolean ifInListNameandLname(String name,String Lastname){
+        Predicate<Passenger> startPredicate = el -> (el.getLastname().equals(Lastname)&&el.getName().equals(name));
+        return passengerslist.stream().anyMatch(startPredicate);
     }
 
 
