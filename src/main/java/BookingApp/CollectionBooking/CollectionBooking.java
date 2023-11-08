@@ -54,8 +54,10 @@ public class CollectionBooking<T> implements Serializable, BookingDao {
     }
     @Override
     public Boolean deleateByUID(String uid) {
-        List<Booking<Flight> > templist = this.db.stream().filter(el->el.getUniqueID().equals(uid)).toList();
+        List<Booking<Flight> > templist = this.db.stream().filter(el->!el.getUniqueID().equals(uid)).toList();
         ArrayList<Booking<Flight> > templ = new ArrayList<>(templist);
+        System.out.println(templ);
+        System.out.println(this.db.toString());
         setDb(templ);
         saveToFile(templ);
         return getByID(uid).isPresent();
