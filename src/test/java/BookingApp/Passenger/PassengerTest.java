@@ -55,4 +55,5 @@ public class PassengerTest {
         assertEquals(passenger1.hashCode(), passenger2.hashCode());
         assertNotEquals(passenger1.hashCode(), passenger3.hashCode());
     }
+
 }

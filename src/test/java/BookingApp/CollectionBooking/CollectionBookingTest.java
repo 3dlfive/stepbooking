@@ -102,14 +102,13 @@ class CollectionBookingTest {
     void getByLastname(){
 
 
-        System.out.println(bookcolection.getByLastname("Hendricks"));
+        System.out.println(bookcolection.search("Hendricks"));
         System.out.println("Finish");
 
     }
     @Test
     void testExceptionWhenAddmorepassenger() {
         String uid = case2.getUniqueID();
-
 
         assertThrows(PassengersMoreThenTicketsException.class, () -> {
             bookcolection.addPassenger(uid,"Finish","Den");

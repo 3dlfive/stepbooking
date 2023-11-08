@@ -26,16 +26,19 @@ public class BookingService implements Serializable {
         this.service = service;
     }
 
-    public ArrayList<Booking<Flight> > getall() {
+    public ArrayList<Booking<Flight>> getall() {
         return service.getAllBookings();
     }
 
-    public Optional<Booking<Flight> > findById(String id) {
+    public Optional<Booking<Flight>> findById(String id) {
         return service.getByID(id);
     }
 
-    public List<Booking<Flight> > findByLastName(String ln) {
-        return service.getByLastname(ln);
+    public List<Booking<Flight>> search(String ln) {
+        return service.search(ln);
+    }
+    public List<Booking<Flight>> search(String n,String ln) {
+        return service.search(n,ln);
     }
 
     public boolean dropByClass(Booking<Flight>  booking) {

@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 public class Passengers implements Serializable {
     Logger log = new Logger();
@@ -63,6 +64,12 @@ public class Passengers implements Serializable {
     }
     public  int getSize(){
         return passengerslist.size();
+    }
+    public  boolean ifInList(String nameOrLastname){
+        Predicate<Passenger> startPredicate = el -> (el.getLastname().equals(nameOrLastname)||el.getName().equals(nameOrLastname));
+
+        return passengerslist.stream().anyMatch(startPredicate);
+
     }
 
 

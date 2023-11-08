@@ -41,7 +41,7 @@ public class BookingController implements Serializable {
 
     public List<Booking<Flight> > findByLastName(String ln) {
         logger.info(ln);
-        return controller.findByLastName(ln);
+        return controller.search(ln);
     }
 
     public boolean dropByClass(Booking<Flight>  booking) {
