@@ -45,7 +45,7 @@ class PassengersTest {
         assertEquals(passangers.ifInListAny(nameOrLastname),expectedResult);
     }
     @ParameterizedTest(name="{0} = {1} = {2}")
-    @DisplayName("Check inlist method.")
+    @DisplayName("Check inlist method. by two parametrs")
     @CsvSource({
             "John,Doe,true",
             "Jessica,Marraci,true",
