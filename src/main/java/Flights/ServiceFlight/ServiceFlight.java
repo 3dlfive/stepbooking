@@ -17,8 +17,8 @@ public class ServiceFlight {
         this.db = db;
     }
 
-    public void generateFlights (int amount)
-    {
+    //methods
+    public void generateFlights (int amount) {
         int sizeBefore = db.getAll().size();
         for(int i=sizeBefore; i<amount+sizeBefore; i++){
             db.add(new Flight(
@@ -38,7 +38,7 @@ public class ServiceFlight {
     public ArrayList<Flight> getSpecific(Airport dest, LocalDate date, int places) {
         ArrayList<Flight> list = new ArrayList<>(
                 db.getAll().stream()
-                .filter(x -> x.getDestination() == dest && x.getDate()==date && x.getEmptySeats() >= places)
+                .filter(x -> (x.getDestination() == dest) && (x.getDate().equals(date)) && (x.getEmptySeats() >= places))
                 .toList()
         );
         return list;
@@ -52,5 +52,17 @@ public class ServiceFlight {
     public void add(Flight flight){
         db.add(flight);
     }
+    public void takeSeats(int flightId, int count){
+        db.getByID(flightId).setEmptySeats( db.getByID(flightId).getEmptySeats() - count );
+    }
+    public void freeSeats(int flightId, int count){
+        db.getByID(flightId).setEmptySeats( db.getByID(flightId).getEmptySeats() + count );
+    }
 
+    public void saveToFile(){
+        db.dataToFile();
+    }
+    public void loadFromFile(){
+        db.dataFromFile();
+    }
 }

@@ -93,19 +93,19 @@ public class Flight{
 
         StringBuffer sb = new StringBuffer();
         sb.append(this.flightID);
-        sb.append(";");
+        sb.append(" ");
         sb.append(this.date.getYear());
         sb.append("/");
         sb.append(this.date.getMonthValue());
         sb.append("/");
         sb.append(this.date.getDayOfMonth());
-        sb.append(";");
+        sb.append(" ");
         sb.append(this.destination);
-        sb.append(";");
+        sb.append(" ");
         sb.append(this.airline);
-        sb.append(";");
+        sb.append(" ");
         sb.append(this.emptySeats);
-        sb.append(";");
+        sb.append(" ");
         sb.append(this.time.getHour());
         sb.append("/");
         sb.append(this.time.getMinute());
@@ -113,7 +113,7 @@ public class Flight{
         return sb.toString();
     }
     public static Flight deserialize(String in){
-        ArrayList<String> parts = new ArrayList<>(List.of(in.split(";")));
+        ArrayList<String> parts = new ArrayList<>(List.of(in.split(" ")));
         ArrayList<String> date = new ArrayList<>(List.of(parts.get(1).split("/")));
         ArrayList<String> time = new ArrayList<>(List.of(parts.get(5).split("/")));
         Flight flight = new Flight(
