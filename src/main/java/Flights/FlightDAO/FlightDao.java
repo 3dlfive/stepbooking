@@ -9,5 +9,5 @@ public interface FlightDao {
     Flight getByID(int id);
     void add(Flight flight);
     void dataToFile();
-    ArrayList<Flight> dataFromFile();
+    void dataFromFile();
 }

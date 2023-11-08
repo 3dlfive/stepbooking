@@ -3,6 +3,8 @@ package Flights.CollectionFlightDAO;
 import Flights.Flight.Flight;
 import Flights.FlightDAO.FlightDao;
 
+import java.io.*;
+import java.io.File;
 import java.util.ArrayList;
 
 public class CollectionFlightDAO implements FlightDao {
@@ -28,11 +30,42 @@ public class CollectionFlightDAO implements FlightDao {
 
     @Override
     public void dataToFile() {
-        //todo
+        File f = new File("Flights.txt");
+        StringBuilder sb = new StringBuilder();
+        for (Flight flight: flights){
+            sb.append(flight.serialize());
+            sb.append("\r\n");
+        }
+
+        try {
+            FileWriter fw = new FileWriter(f);
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            f.delete();
+            bw.write(sb.toString());
+            bw.close();
+        }
+        catch (IOException e) {
+            System.out.println(e);
+        }
+
     }
 
     @Override
-    public ArrayList<Flight> dataFromFile() {
-        return null;//todo
+    public void dataFromFile() {
+        File f = new File("Flights.txt");
+        try {
+            FileReader fr = new FileReader(f);
+            BufferedReader br = new BufferedReader(fr);
+            flights.clear();
+            while (true) {
+                String line = br.readLine();
+                if (line == null) break;
+                flights.add(Flight.deserialize(line));
+            }
+        }
+        catch (IOException e) {
+            System.out.println(e);
+        }
     }
 }

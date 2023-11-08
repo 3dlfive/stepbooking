@@ -17,8 +17,8 @@ public class ServiceFlight {
         this.db = db;
     }
 
-    public void generateFlights (int amount)
-    {
+    //methods
+    public void generateFlights (int amount) {
         int sizeBefore = db.getAll().size();
         for(int i=sizeBefore; i<amount+sizeBefore; i++){
             db.add(new Flight(
@@ -54,8 +54,15 @@ public class ServiceFlight {
     }
     public void takeSeats(int flightId, int count){
         db.getByID(flightId).setEmptySeats( db.getByID(flightId).getEmptySeats() - count );
-    } //віднімає count вільних місць у рейсу
+    }
     public void freeSeats(int flightId, int count){
         db.getByID(flightId).setEmptySeats( db.getByID(flightId).getEmptySeats() + count );
-    } //додає count вільних місць рейсу
+    }
+
+    public void saveToFile(){
+        db.dataToFile();
+    }
+    public void loadFromFile(){
+        db.dataFromFile();
+    }
 }
