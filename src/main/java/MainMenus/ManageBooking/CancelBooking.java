@@ -16,6 +16,7 @@ public class CancelBooking implements Command {
         System.out.println("Выдалити по UID");
         System.out.println("Список усіх Бронювань:");
         controller.getall().stream().forEach(el -> System.out.println("\n"+el.getUniqueID() + " " + el.getLastname() + " " + el.getName()));
+        System.out.println("---------------git ");
         controller.dropByUID(in.nextLine());
 
     }
