@@ -69,4 +69,12 @@ public class BookingController implements Serializable {
         logger.info();
         return controller.loadData();
     }
+    public ArrayList<Booking<Flight> > search(String nameorLname) {
+        logger.info(nameorLname);
+        return controller.search(nameorLname);
+    }
+    public ArrayList<Booking<Flight> > search(String name,String lastname) {
+        logger.info(name+" "+lastname);
+        return controller.search(name,lastname);
+    }
 }

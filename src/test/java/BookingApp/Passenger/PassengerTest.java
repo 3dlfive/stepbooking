@@ -42,8 +42,8 @@ public class PassengerTest {
         Passenger passenger2 = new Passenger("John", "Doe");
         Passenger passenger3 = new Passenger("Jane", "Smith");
 
-        assertTrue(passenger1.equals(passenger2));
-        assertFalse(passenger1.equals(passenger3));
+        assertEquals(passenger1, passenger2);
+        assertNotEquals(passenger1, passenger3);
     }
 
     @Test

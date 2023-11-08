@@ -38,13 +38,10 @@ public class CollectionBooking<T> implements Serializable, BookingDao {
         return this.db.stream().filter(el->el.getUniqueID().equals(uniqueID)).findFirst();
     }
     public List<Booking<Flight> > search(String lastnameOrName) {
-        List<Booking<Flight> > ll = this.db.stream().filter(el->(el.getLastname().equals(lastnameOrName)||el.getName().equals(lastnameOrName))).toList();
-
-        return ll;
+        return this.db.stream().filter(el->el.getPl().ifInListAny(lastnameOrName)).toList();
     }
     public List<Booking<Flight> > search(String name,String lastname) {
-        List<Booking<Flight> > ll = this.db.stream().filter(el->el.getLastname().equals(lastname)||el.getName().equals(name)).toList();
-        return ll;
+        return this.db.stream().filter(el->el.getPl().ifInListNameandLname(name,lastname)).toList();
     }
 
     @Override

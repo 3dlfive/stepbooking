@@ -8,6 +8,7 @@ import Flights.ControllerFlight.ControllerFlight;
 import Flights.Flight.Flight;
 import Flights.ServiceFlight.ServiceFlight;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ class CollectionBookingTest {
         case1 = new Booking<>(fc.getByID(0),"Benita","Bradberry",5);
         case2 = new Booking<>(fc.getByID(1),"Vera","Hendricks",2);
         case3 = new Booking<>(fc.getByID(2),"Keturah","Persons",3);
-        case4 = new Booking<>(fc.getByID(3),"Morrel","Brimmer",3);
+        case4 = new Booking<>(fc.getByID(3),"Vera","Brimmer",3);
         case5 = new Booking<>(fc.getByID(4),"Korri","Ofarrell",5);
         case6 = new Booking<>(fc.getByID(5),"Hagen","Finke",2);
 
@@ -99,12 +100,19 @@ class CollectionBookingTest {
         assertEquals(bookcolection.countBookings(),5);
     }
     @Test
-    void getByLastname(){
-
-
-        System.out.println(bookcolection.search("Hendricks"));
-        System.out.println("Finish");
-
+    @DisplayName("Not found search by name or lastname")
+    void byNameorLastname(){
+assertEquals(bookcolection.search("aas").size(),0);
+    }
+    @Test
+    @DisplayName("Found search by name and lastname")
+    void byNameorLastname2(){
+assertEquals(bookcolection.search("Benita","Bradberry").size(),1);
+    }
+    @Test
+    @DisplayName("Found search by name or lastname ")
+    void byNameorLastname3(){
+assertEquals(bookcolection.search("Vera").size(),2);
     }
     @Test
     void testExceptionWhenAddmorepassenger() {
