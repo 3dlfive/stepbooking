@@ -29,6 +29,9 @@ public class ControllerFlight {
     public void add(Flight flight){
         fs.add(flight);
     }
+    public ArrayList<Flight> nextFlights(){
+        return fs.nextFlights();
+    }
     public void takeSeats(int flightId, int count){
         fs.takeSeats(flightId, count);
     } // віднімає count вільних місць у рейсу

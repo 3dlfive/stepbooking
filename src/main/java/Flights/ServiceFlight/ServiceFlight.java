@@ -24,9 +24,9 @@ public class ServiceFlight {
             db.add(new Flight(
                     i,
                     LocalDate.of(
-                            (int)(Math.random() * 5 + 2023),
-                            (int)(Math.random() * 12+1),
-                            (int)(Math.random() * 28 +1)),
+                            LocalDate.now().getYear(),
+                            LocalDate.now().getMonth(),
+                            (int) (Math.random() * LocalDate.now().getMonth().length(LocalDate.now().isLeapYear()) + 1)),
                     Arrays.asList(Airport.values()).get((int) (Math.random() * Airport.values().length)),
                     Arrays.asList(Airline.values()).get((int) (Math.random() * Airline.values().length)),
                     (int)(Math.random() * 301),
@@ -51,6 +51,20 @@ public class ServiceFlight {
     }
     public void add(Flight flight){
         db.add(flight);
+    }
+    public ArrayList<Flight> nextFlights(){
+        ArrayList<Flight> list = new ArrayList<>(
+                db.getAll().stream()
+                        .filter(x ->
+                                ( x.getDate().equals(LocalDate.now())
+                                        && x.getTime().isAfter(LocalTime.now())) ||
+                                        ( x.getDate().equals(LocalDate.now().plusDays(1))
+                                                && x.getTime().isBefore(LocalTime.now())
+                                        )
+                        )
+                        .toList()
+        );
+        return list;
     }
     public void takeSeats(int flightId, int count){
         db.getByID(flightId).setEmptySeats( db.getByID(flightId).getEmptySeats() - count );
