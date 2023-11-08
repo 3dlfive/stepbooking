@@ -26,16 +26,19 @@ public class BookingService implements Serializable {
         this.service = service;
     }
 
-    public ArrayList<Booking<Flight> > getall() {
+    public ArrayList<Booking<Flight>> getall() {
         return service.getAllBookings();
     }
 
-    public Optional<Booking<Flight> > findById(String id) {
+    public Optional<Booking<Flight>> findById(String id) {
         return service.getByID(id);
     }
 
-    public List<Booking<Flight> > findByLastName(String ln) {
-        return service.getByLastname(ln);
+    public ArrayList<Booking<Flight>> search(String ln) {
+        return (ArrayList<Booking<Flight>>) service.search(ln);
+    }
+    public ArrayList<Booking<Flight>> search(String n,String ln) {
+        return (ArrayList<Booking<Flight>>) service.search(n,ln);
     }
 
     public boolean dropByClass(Booking<Flight>  booking) {
@@ -59,7 +62,11 @@ public class BookingService implements Serializable {
         return service.loadData();
     }
 
-
+    public boolean dropPassenger(String UID,String name, String lName){
+        return service.dropPassenger(UID,name,lName);
+    }    public boolean addPassenger(String UID,String name, String lName){
+        return service.addPassenger(UID,name,lName);
+    }
 
 
 }

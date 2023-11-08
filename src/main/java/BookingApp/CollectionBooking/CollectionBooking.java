@@ -37,9 +37,11 @@ public class CollectionBooking<T> implements Serializable, BookingDao {
     public Optional<Booking<Flight> > getByID(String uniqueID) {
         return this.db.stream().filter(el->el.getUniqueID().equals(uniqueID)).findFirst();
     }
-    public List<Booking<Flight> > getByLastname(String lastname) {
-        List<Booking<Flight> > ll = this.db.stream().filter(el->el.getLastname().equals(lastname)).toList();
-        return ll;
+    public List<Booking<Flight> > search(String lastnameOrName) {
+        return this.db.stream().filter(el->el.getPl().ifInListAny(lastnameOrName)).toList();
+    }
+    public List<Booking<Flight> > search(String name,String lastname) {
+        return this.db.stream().filter(el->el.getPl().ifInListNameandLname(name,lastname)).toList();
     }
 
     @Override
@@ -112,5 +114,27 @@ public class CollectionBooking<T> implements Serializable, BookingDao {
         }
 
         return bookingList;
+    }
+    public boolean addPassenger(String UID,String Name, String LastName) throws PassengersMoreThenTicketsException{
+        Optional<Booking<Flight> > bookingThatWeLookingFor=  this.getByID(UID);
+
+        if (bookingThatWeLookingFor.isPresent()){
+            if (bookingThatWeLookingFor.get().getPl().getSize() > bookingThatWeLookingFor.get().getTicketsAmount()) throw new PassengersMoreThenTicketsException(String.format("Ви хочете додати пассажира але квитків тільки %S",bookingThatWeLookingFor.get().getTicketsAmount()),bookingThatWeLookingFor.get().getTicketsAmount());
+            bookingThatWeLookingFor.get().addPasenger(Name,LastName);
+           this.smartAdd(bookingThatWeLookingFor.get());
+           return true;
+        } else {
+            return false;
+        }
+    }
+    public boolean dropPassenger(String UID,String name, String lName) {
+        Optional<Booking<Flight> > bookingThatWeLookingFor=  this.getByID(UID);
+        if (bookingThatWeLookingFor.isPresent()){
+           bookingThatWeLookingFor.get().removePasenger(name,lName);
+           this.smartAdd(bookingThatWeLookingFor.get());
+           return true;
+        } else {
+            return false;
+        }
     }
 }

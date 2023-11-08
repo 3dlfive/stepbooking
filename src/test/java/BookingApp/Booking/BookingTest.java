@@ -1,5 +1,7 @@
 package BookingApp.Booking;
 
+import BookingApp.Passenger.Passenger;
+import BookingApp.Passenger.Passengers;
 import Flights.CollectionFlightDAO.CollectionFlightDAO;
 import Flights.ControllerFlight.ControllerFlight;
 import Flights.Flight.Flight;
@@ -19,6 +21,14 @@ class BookingTest {
     Booking<Flight> case3;
     Booking<Flight> case4;
     Booking<Flight> case5;
+    Booking<Flight> case6;
+    Booking<Flight> case7;
+    Passenger p1 = new Passenger("Lamesha", "Maurin");
+    Passenger p2 = new Passenger("Pento", "Dino");
+    Passenger p3 = new Passenger("Esha", "Maur");
+    Passenger p4 = new Passenger("Lame", "Rin");
+    ArrayList<Passenger> plist = new ArrayList<>();
+    Passengers pl = new Passengers();
     @BeforeEach
 
     void setup(){
@@ -30,6 +40,14 @@ class BookingTest {
         case3 = new Booking<>(fc.getByID(3),"Keturah","Persons",3);
         case4 = new Booking<>(fc.getByID(4),"Morrel","Brimmer",3);
         case5 = new Booking<>(fc.getByID(5),"Korri","Ofarrell",5);
+        case6 = new Booking<>(fc.getByID(6),"Dentro","Origato",1);//check exception
+
+
+        plist.add(p1);
+        plist.add(p2);
+        plist.add(p3);
+        pl.setPassengerslist(plist);
+        case7 = new Booking<>(fc.getByID(6),"Dentro","Origato",5,pl);
     }
     @Test
     @DisplayName("Test that to object have diffrent UID")
@@ -80,5 +98,7 @@ class BookingTest {
     void testNotEquals() {
         assertNotEquals(case1, case2);
     }
+
+
 
 }
