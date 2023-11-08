@@ -1,4 +1,4 @@
-package comands;
+package MainMenus;
 
 public class Exit implements Command {
     @Override

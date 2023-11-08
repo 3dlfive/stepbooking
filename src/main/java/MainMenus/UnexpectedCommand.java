@@ -1,4 +1,4 @@
-package comands;
+package MainMenus;
 
 
 import table.Console;

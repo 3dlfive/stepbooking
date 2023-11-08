@@ -93,7 +93,7 @@ public class CollectionBooking<T> implements Serializable, BookingDao {
     @Override
     public ArrayList<Booking<Flight> > loadData() {
 
-        ArrayList<Booking<Flight> > bookingList = null;
+        ArrayList<Booking<Flight> > bookingList = new ArrayList<>();
 
         try (ObjectInputStream inputStream = new ObjectInputStream(
                 new FileInputStream("bookingDB.bin")
@@ -102,6 +102,8 @@ public class CollectionBooking<T> implements Serializable, BookingDao {
 
             System.out.println(bookingList);
         } catch (FileNotFoundException e) {
+            this.saveToFile(bookingList);
+            this.loadData();
             throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);

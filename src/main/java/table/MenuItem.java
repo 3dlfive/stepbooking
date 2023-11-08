@@ -1,6 +1,6 @@
 package table;
 
-import comands.Command;
+import MainMenus.Command;
 
 public class MenuItem {
     private final int id;
