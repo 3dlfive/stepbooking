@@ -52,5 +52,10 @@ public class ServiceFlight {
     public void add(Flight flight){
         db.add(flight);
     }
-
+    public void takeSeats(int flightId, int count){
+        db.getByID(flightId).setEmptySeats( db.getByID(flightId).getEmptySeats() - count );
+    } //віднімає count вільних місць у рейсу
+    public void freeSeats(int flightId, int count){
+        db.getByID(flightId).setEmptySeats( db.getByID(flightId).getEmptySeats() + count );
+    } //додає count вільних місць рейсу
 }
