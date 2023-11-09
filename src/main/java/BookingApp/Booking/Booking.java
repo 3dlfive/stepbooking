@@ -13,7 +13,7 @@ import java.util.UUID;
 
 public class Booking<T> implements Serializable {
     static final long serialVersionUID = 1;
-    private transient T flight;
+    private T flight;
     private String name;
 
     public Booking(T flight,String name, String lastname, int ticketsAmount,Passengers passengers) {
