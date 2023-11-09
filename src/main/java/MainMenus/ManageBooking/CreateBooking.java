@@ -18,6 +18,7 @@ public class CreateBooking implements Command {
     @Override
     public void apply() {
         fc.generateFlights(150);// Как грузить с файла
+        fc.loadFromFile();
         controller.loadData();
         System.out.println("Выдалити по UID");
         System.out.println("Name?");
@@ -27,7 +28,6 @@ public class CreateBooking implements Command {
         System.out.println("Amount of tickets?");
         int aticket = in.nextInt();
         // Logic of chosen Flights
-
         Booking<Flight> book = new Booking<>(fc.getByID(1),name,lnmae,2);
 
         controller.save(book);
