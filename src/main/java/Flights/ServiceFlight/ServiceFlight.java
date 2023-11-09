@@ -1,5 +1,6 @@
 package Flights.ServiceFlight;
 
+import Flights.CollectionFlightDAO.CollectionFlightDAO;
 import Flights.Enums.Airline;
 import Flights.Enums.Airport;
 import Flights.Flight.Flight;
@@ -15,6 +16,12 @@ public class ServiceFlight {
 
     public ServiceFlight(FlightDao db) {
         this.db = db;
+    }
+    public ServiceFlight() {
+        this.db = new CollectionFlightDAO(new ArrayList<>());
+    }
+    public void SetDao(CollectionFlightDAO dao){
+        this.db = dao;
     }
 
     //methods

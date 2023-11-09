@@ -1,5 +1,6 @@
 package Flights.ControllerFlight;
 
+import Flights.CollectionFlightDAO.CollectionFlightDAO;
 import Flights.Enums.Airport;
 import Flights.Flight.Flight;
 import Flights.ServiceFlight.ServiceFlight;
@@ -11,6 +12,12 @@ public class ControllerFlight {
     private ServiceFlight fs;
     public ControllerFlight(ServiceFlight fs) {
         this.fs = fs;
+    }
+    public ControllerFlight() {
+        this.fs = new ServiceFlight();
+    }
+    public void SetService(ServiceFlight service){
+        this.fs = service;
     }
 
     //methods
