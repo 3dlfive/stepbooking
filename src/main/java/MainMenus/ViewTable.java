@@ -8,6 +8,8 @@ import table.Console;
 
 import Flights.ControllerFlight.ControllerFlight;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,13 +21,20 @@ public class ViewTable implements Command {
 
     @Override
     public void apply() {
-        controllerFlight.generateFlights(500);
+        File file = new File("Flights.txt");
+        if (file.exists()) {
+            // Файл існує, тому ми можемо спробувати його завантажити
+            controllerFlight.loadFromFile();
+        } else {
+            // Файл не існує, ми повинні створити нову базу даних
 
-        List<Flight> nextFlights = controllerFlight.nextFlights();
-        nextFlights.forEach(flight -> System.out.println(flight.toString()));
+            controllerFlight.generateFlights(100);
 
+            List<Flight> nextFlights = controllerFlight.nextFlights();
+            nextFlights.forEach(flight -> System.out.println(flight.toString()));
 
+        }
 
     }
-
 }
+
