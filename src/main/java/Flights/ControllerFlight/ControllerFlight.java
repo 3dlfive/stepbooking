@@ -5,6 +5,7 @@ import Flights.Enums.Airport;
 import Flights.Flight.Flight;
 import Flights.ServiceFlight.ServiceFlight;
 
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -49,7 +50,7 @@ public class ControllerFlight {
     public void saveToFile(){
         fs.saveToFile();
     }
-    public void loadFromFile(){
+    public void loadFromFile() throws FileNotFoundException {
         fs.loadFromFile();
     }
 }

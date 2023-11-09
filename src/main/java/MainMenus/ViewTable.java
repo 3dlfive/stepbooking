@@ -8,6 +8,8 @@ import table.Console;
 
 import Flights.ControllerFlight.ControllerFlight;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +21,12 @@ public class ViewTable implements Command {
 
     @Override
     public void apply() {
-        controllerFlight.generateFlights(500);
+        try {controllerFlight.loadFromFile();} catch (FileNotFoundException e){
+            System.out.println("File not found it generate it");
+            controllerFlight.generateFlights(500);
+            controllerFlight.saveToFile();
+        }
+
 
         List<Flight> nextFlights = controllerFlight.nextFlights();
         nextFlights.forEach(flight -> System.out.println(flight.toString()));
