@@ -95,7 +95,7 @@ class FlightTest {
                 220,
                 LocalTime.of(12, 30)
         );
-        String expected = "Flight{airline='AIR CANADA', date=1990-10-01, time=12:30, destination='Augsburg', emptySeats=220}";
+        String expected = "Flight{ID=1, airline='AIR CANADA', date=1990-10-01, time=12:30, destination='Augsburg', emptySeats=220}";
         assertEquals(expected, f.toString());
     }
 
