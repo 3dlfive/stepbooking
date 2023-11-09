@@ -1,6 +1,7 @@
 package table;
 
-import comands.*;
+import MainMenus.*;
+import MainMenus.ManageBooking.BookFlight;
 
 public class App {
     private static App single_instance = null;
@@ -14,10 +15,9 @@ public class App {
 
     public void run() {
         Menu menu = new Menu();
-        menu.add("Онайн-табло", new ViewTable());
+        menu.add("Онайн-табло останні 24 рейса", new ViewTable());
         menu.add("Подивитися інформацію про рейс", new ViewFlight());
-        menu.add("Пошук та бронювання рейсу", new BookFlight());
-        menu.add("Скасувати бронювання", new CancelBooking());
+        menu.add("Управління бронуванням", new BookFlight());
         menu.add("Мої рейси", new MyFlights());
         menu.add("Вихід", new Exit());
 

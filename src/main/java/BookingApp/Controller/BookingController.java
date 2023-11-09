@@ -36,6 +36,7 @@ public class BookingController implements Serializable {
 
     public Optional<Booking<Flight>> findById(String id) {
         logger.info(id);
+        System.out.println(controller.findById(id).toString());
         return controller.findById(id);
     }
 
@@ -67,10 +68,12 @@ public class BookingController implements Serializable {
     }
     public ArrayList<Booking<Flight> > search(String nameorLname) {
         logger.info(nameorLname);
+        System.out.println(controller.search(nameorLname).toString());
         return controller.search(nameorLname);
     }
-    public ArrayList<Booking<Flight> > search(String name,String lastname) {
+    public List<Booking<Flight> > search(String name,String lastname) {
         logger.info(name+" "+lastname);
+        System.out.println(controller.search(name,lastname).toString());
         return controller.search(name,lastname);
     }
     public boolean addPassanger(String UID,String name, String lName) {

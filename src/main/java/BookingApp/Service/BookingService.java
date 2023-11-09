@@ -37,8 +37,8 @@ public class BookingService implements Serializable {
     public ArrayList<Booking<Flight>> search(String ln) {
         return (ArrayList<Booking<Flight>>) service.search(ln);
     }
-    public ArrayList<Booking<Flight>> search(String n,String ln) {
-        return (ArrayList<Booking<Flight>>) service.search(n,ln);
+    public List<Booking<Flight>> search(String n,String ln) {
+        return  service.search(n,ln);
     }
 
     public boolean dropByClass(Booking<Flight>  booking) {

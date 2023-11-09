@@ -1,7 +1,8 @@
-package comands;
+package MainMenus;
 
 
-public class CancelBooking implements Command {
+
+public class ViewTable implements Command {
 
     @Override
     public void apply() {

@@ -1,7 +1,8 @@
-package comands;
+package MainMenus;
 
 
-public class BookFlight implements Command {
+public class CancelBooking implements Command {
+
     @Override
     public void apply() {
 

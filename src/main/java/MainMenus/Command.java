@@ -1,4 +1,4 @@
-package comands;
+package MainMenus;
 
 public interface Command {
     void apply();

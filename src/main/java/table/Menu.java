@@ -1,7 +1,7 @@
 package table;
 
-import comands.Command;
-import comands.UnexpectedCommand;
+import MainMenus.Command;
+import MainMenus.UnexpectedCommand;
 
 import java.util.ArrayList;
 import java.util.List;

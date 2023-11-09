@@ -1,8 +1,7 @@
-package comands;
+package MainMenus;
 
 
-
-public class ViewTable implements Command {
+public class MyFlights implements Command {
 
     @Override
     public void apply() {

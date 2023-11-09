@@ -54,8 +54,10 @@ public class CollectionBooking<T> implements Serializable, BookingDao {
     }
     @Override
     public Boolean deleateByUID(String uid) {
-        List<Booking<Flight> > templist = this.db.stream().filter(el->el.getUniqueID().equals(uid)).toList();
+        List<Booking<Flight> > templist = this.db.stream().filter(el->!el.getUniqueID().equals(uid)).toList();
         ArrayList<Booking<Flight> > templ = new ArrayList<>(templist);
+        System.out.println(templ);
+        System.out.println(this.db.toString());
         setDb(templ);
         saveToFile(templ);
         return getByID(uid).isPresent();
@@ -93,7 +95,7 @@ public class CollectionBooking<T> implements Serializable, BookingDao {
     @Override
     public ArrayList<Booking<Flight> > loadData() {
 
-        ArrayList<Booking<Flight> > bookingList = null;
+        ArrayList<Booking<Flight> > bookingList = new ArrayList<>();
 
         try (ObjectInputStream inputStream = new ObjectInputStream(
                 new FileInputStream("bookingDB.bin")
@@ -102,6 +104,8 @@ public class CollectionBooking<T> implements Serializable, BookingDao {
 
             System.out.println(bookingList);
         } catch (FileNotFoundException e) {
+            this.saveToFile(bookingList);
+            this.loadData();
             throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
