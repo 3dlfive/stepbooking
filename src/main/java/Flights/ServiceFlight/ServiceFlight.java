@@ -6,6 +6,7 @@ import Flights.Enums.Airport;
 import Flights.Flight.Flight;
 import Flights.FlightDAO.FlightDao;
 
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -83,7 +84,7 @@ public class ServiceFlight {
     public void saveToFile(){
         db.dataToFile();
     }
-    public void loadFromFile(){
+    public void loadFromFile() throws FileNotFoundException {
         db.dataFromFile();
     }
 }

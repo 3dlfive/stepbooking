@@ -12,6 +12,7 @@ public class AllBookings implements Command {
         
         controller.loadData();
         controller.getall();
+
     }
 
     @Override
