@@ -19,6 +19,12 @@ Logs write to application.log
 
 
 ### Booking controller
+Методы контроллера которые изменяют контроллер(добавить пассажиров, удалить, добавить брони и тд.) также меняют бд и перезаписывают файлы бд.
+#### Creating controller
+`BookingController bc = new BookingController();` -пустой контроллер
+
+`BookingController bc = new BookingController(new BookingService())` -пустой контроллер;
+BookingController bc = new BookingController();
 #### Описание методов контроллера 
 
 | Возвращает   |                        Метод                        | Описание                                                                  |
