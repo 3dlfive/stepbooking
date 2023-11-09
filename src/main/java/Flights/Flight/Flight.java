@@ -81,7 +81,8 @@ public class Flight{
     @Override
     public String toString () {
         return( "Flight{"+
-                "airline=\'" + airline.label + "\'" +
+                "ID=" + flightID +
+                ", airline=\'" + airline.label + "\'" +
                 ", date=" + date +
                 ", time=" + time +
                 ", destination=\'" + destination + "\'" +
