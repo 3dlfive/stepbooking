@@ -8,6 +8,7 @@ import Flights.Flight.Flight;
 import Flights.ServiceFlight.ServiceFlight;
 import MainMenus.Command;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,9 +17,12 @@ public class CreateBooking implements Command {
     private static final Scanner in = new Scanner(System.in);
     ControllerFlight fc = new ControllerFlight(new ServiceFlight(new CollectionFlightDAO(new ArrayList<>())));
     @Override
-    public void apply() {
-        fc.generateFlights(150);// Как грузить с файла
-        fc.loadFromFile();
+    public void apply()  {
+        try {fc.loadFromFile();} catch (FileNotFoundException e){
+            System.out.println("File not found it generate it");
+            fc.generateFlights(500);
+            fc.saveToFile();
+        }
         controller.loadData();
         System.out.println("Выдалити по UID");
         System.out.println("Name?");

@@ -52,7 +52,7 @@ public class CollectionFlightDAO implements FlightDao {
     }
 
     @Override
-    public void dataFromFile() {
+    public void dataFromFile() throws FileNotFoundException {
         File f = new File("Flights.txt");
         try {
             FileReader fr = new FileReader(f);
@@ -63,6 +63,8 @@ public class CollectionFlightDAO implements FlightDao {
                 if (line == null) break;
                 flights.add(Flight.deserialize(line));
             }
+        }catch (FileNotFoundException e) {
+            throw new FileNotFoundException();
         }
         catch (IOException e) {
             System.out.println(e);
