@@ -15,13 +15,13 @@ import java.util.Scanner;
 public class CreateBooking implements Command {
     BookingController controller = new BookingController();
     private static final Scanner in = new Scanner(System.in);
-    ControllerFlight fc = new ControllerFlight(new ServiceFlight(new CollectionFlightDAO(new ArrayList<>())));
+    ControllerFlight flc = new ControllerFlight();
     @Override
     public void apply()  {
-        try {fc.loadFromFile();} catch (FileNotFoundException e){
+        try {flc.loadFromFile();} catch (FileNotFoundException e){
             System.out.println("File not found it generate it");
-            fc.generateFlights(500);
-            fc.saveToFile();
+            flc.generateFlights(500);
+            flc.saveToFile();
         }
         controller.loadData();
         System.out.println("Выдалити по UID");
@@ -32,9 +32,12 @@ public class CreateBooking implements Command {
         System.out.println("Amount of tickets?");
         int aticket = in.nextInt();
         // Logic of chosen Flights
-        Booking<Flight> book = new Booking<>(fc.getByID(1),name,lnmae,2);
+        System.out.println("FLight id?");
+        int flightID = in.nextInt();
+        Booking<Flight> book = new Booking<>(flc.getByID(flightID),name,lnmae,2);
 
-        controller.save(book);
+
+        controller.save(book);//При сейве не может сохранить флайт
     }
 
     @Override

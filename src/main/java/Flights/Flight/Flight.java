@@ -3,6 +3,7 @@ package Flights.Flight;
 import Flights.Enums.Airline;
 import Flights.Enums.Airport;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -11,7 +12,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Flight{
+public class Flight implements Serializable {
+    static final long serialVersionUID = 1;
     private int flightID;
     private LocalDate date;
     private Airport destination;

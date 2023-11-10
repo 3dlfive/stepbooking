@@ -106,7 +106,7 @@ public class CollectionBooking<T> implements Serializable, BookingDao {
         } catch (FileNotFoundException e) {
             this.saveToFile(bookingList);
             this.loadData();
-            throw new RuntimeException(e);
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
