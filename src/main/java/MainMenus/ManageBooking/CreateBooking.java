@@ -34,8 +34,22 @@ public class CreateBooking implements Command {
         System.out.println("FLight id?");
         int flightID = in.nextInt();
         Booking<Flight> book = new Booking<>(flc.getByID(flightID),name,lnmae,2);
+        //Ask about passangers
+        if (aticket>1){
+            int i = 0;
+            while((i<(aticket-1))){
+                System.out.println(String.format("Name of passanger %s?",(i+1)));
+                System.out.println("----");
+//  Fist time ask bug? skip name
+                String pn = in.nextLine();
 
-
+                System.out.println(String.format("Lastname of passanger %s?",(i+1)));
+                String pl = in.nextLine();
+                book.addPasenger(pn,pl);
+                i++;
+            }
+        }
+        //we save to controller and to file
         controller.save(book);//При сейве не может сохранить флайт
     }
 
