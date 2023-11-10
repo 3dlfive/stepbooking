@@ -8,6 +8,7 @@ import Flights.FlightDAO.FlightDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -94,12 +95,72 @@ class ServiceFlightTest {
     }
 
     @Test
-    void saveToFile() {
-        //todo
+    void dataToFile(){
+        File f = new File("Flights.txt");
+        if (f.exists()) f.delete();
+        testService.saveToFile();
+        ArrayList<String> expected;
+        ArrayList<String> actual;
+
+        try {
+            FileReader fr = new FileReader(f);
+            BufferedReader br = new BufferedReader(fr);
+            expected = new ArrayList<>();
+            expected.add("1 1990/10/1 Augsburg ACA 220 12/30");
+            expected.add("2 2000/4/7 Chicago ANZ 50 9/0");
+            actual = new ArrayList<>();
+            while(true) {
+                String line = br.readLine();
+                if (line == null) break;
+                actual.add(line);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        assertEquals(expected, actual);
     }
 
     @Test
-    void loadFromFile() {
-        //todo
+    void dataFromFile() {
+        File f = new File("Flights.txt");
+        if (f.exists()) f.delete();
+        testService.clear();
+        try {
+            FileWriter fr = new FileWriter(f);
+            fr.write("1 1990/10/1 Augsburg ACA 220 12/30\r\n");
+            fr.write("1 1990/10/1 Augsburg ACA 220 13/40\r\n");
+            fr.close();
+            testService.loadFromFile();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        ArrayList<Flight> expected = new ArrayList<>(List.of(
+                new Flight(
+                        1,
+                        LocalDate.of(1990, 10, 1),
+                        Airport.Augsburg,
+                        Airline.ACA,
+                        220,
+                        LocalTime.of(12, 30)),
+                new Flight(
+                        1,
+                        LocalDate.of(1990, 10, 1),
+                        Airport.Augsburg,
+                        Airline.ACA,
+                        220,
+                        LocalTime.of(13, 40))
+        ));
+
+        ArrayList<Flight> actual = testService.getAll();
+
+        assertEquals(expected.toString(), actual.toString());
+    }
+    @Test
+    void clear() {
+        testService.clear();
+        ArrayList<Flight> expected = new ArrayList<>();
+        assertEquals(expected.toString(), testService.getAll().toString());
     }
 }
