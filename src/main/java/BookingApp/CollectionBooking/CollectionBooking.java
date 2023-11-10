@@ -102,7 +102,6 @@ public class CollectionBooking<T> implements Serializable, BookingDao {
         )) {
             bookingList = (ArrayList<Booking<Flight> >) inputStream.readObject();
 
-            System.out.println(bookingList);
         } catch (FileNotFoundException e) {
             this.saveToFile(bookingList);
             this.loadData();
