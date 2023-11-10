@@ -6,10 +6,8 @@ import Flights.Enums.Airport;
 import Flights.Flight.Flight;
 import Flights.FlightDAO.FlightDao;
 import Flights.ServiceFlight.ServiceFlight;
-import MainMenus.ManageBooking.AllBookings;
-import MainMenus.ManageBooking.BookFlight;
+import MainMenus.ManageBooking.*;
 import MainMenus.ManageBooking.CancelBooking;
-import MainMenus.ManageBooking.CreateBooking;
 import MainMenus.ManageBooking.FindBooking.FindBookings;
 import table.Menu;
 
@@ -62,7 +60,7 @@ public class FindFlight implements Command{
         }
 
         Menu menu = new Menu();
-        menu.add("Забронювати рейс", new CreateBooking());
+        menu.add("Забронювати рейс", new CreateBookingPlus(places));
         menu.add("До головного меню", new Exit());
 
 
