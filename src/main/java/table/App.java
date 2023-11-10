@@ -15,7 +15,9 @@ public class App {
 
     public void run() {
         Menu menu = new Menu();
+        menu.add("Згенерувати рейси", new GenerateFlights());
         menu.add("Онайн-табло останні 24 рейса", new ViewTable());
+        menu.add("Знайти потрібний рейс", new FindFlight());
         menu.add("Подивитися інформацію про рейс", new ViewFlight());
         menu.add("Управління бронуванням", new BookFlight());
         menu.add("Мої рейси", new MyFlights());
