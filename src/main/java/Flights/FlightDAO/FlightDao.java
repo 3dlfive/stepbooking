@@ -11,4 +11,5 @@ public interface FlightDao {
     void add(Flight flight);
     void dataToFile();
     void dataFromFile() throws FileNotFoundException;
+    void clear();
 }
