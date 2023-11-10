@@ -24,7 +24,6 @@ public class CreateBooking implements Command {
             flc.saveToFile();
         }
         controller.loadData();
-        System.out.println("Выдалити по UID");
         System.out.println("Name?");
         String name = in.nextLine();
         System.out.println("lastname?");
@@ -34,7 +33,7 @@ public class CreateBooking implements Command {
         // Logic of chosen Flights
         System.out.println("FLight id?");
         int flightID = in.nextInt();
-        Booking<Flight> book = new Booking<>(flc.getByID(flightID),name,lnmae,2);
+        Booking<Flight> book = new Booking<>(flc.getByID(flightID),name,lnmae,aticket);
         //Ask about passangers
         if (aticket>1){
             int i = 0;
