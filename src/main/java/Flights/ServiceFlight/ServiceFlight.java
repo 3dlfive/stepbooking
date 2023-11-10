@@ -87,4 +87,7 @@ public class ServiceFlight {
     public void loadFromFile() throws FileNotFoundException {
         db.dataFromFile();
     }
+    public void clear(){
+        db.clear();
+    }
 }

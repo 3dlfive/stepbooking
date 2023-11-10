@@ -53,4 +53,7 @@ public class ControllerFlight {
     public void loadFromFile() throws FileNotFoundException {
         fs.loadFromFile();
     }
+    public void clear(){
+        fs.clear();
+    }
 }

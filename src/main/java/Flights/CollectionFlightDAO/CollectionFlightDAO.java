@@ -70,4 +70,9 @@ public class CollectionFlightDAO implements FlightDao {
             System.out.println(e);
         }
     }
+
+    @Override
+    public void clear() {
+        flights.clear();
+    }
 }
