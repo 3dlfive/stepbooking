@@ -28,7 +28,6 @@ public class CreateBookingPlus implements Command {
             flc.saveToFile();
         }
         controller.loadData();
-        System.out.println("Выдалити по UID");
         System.out.println("Name?");
         String name = in.nextLine();
         System.out.println("lastname?");
