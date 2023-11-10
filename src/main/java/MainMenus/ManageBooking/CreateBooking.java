@@ -39,9 +39,12 @@ public class CreateBooking implements Command {
         if (aticket>1){
             int i = 0;
             while((i<(aticket-1))){
-                System.out.println("Name of passanger?");
-                String pn= in.nextLine();
-                System.out.println("LastName of passanger?");
+                System.out.println(String.format("Name of passanger %s?",(i+1)));
+                System.out.println("----");
+//  Fist time ask bug? skip name
+                String pn = in.nextLine();
+
+                System.out.println(String.format("Lastname of passanger %s?",(i+1)));
                 String pl = in.nextLine();
                 book.addPasenger(pn,pl);
                 i++;
