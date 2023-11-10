@@ -4,6 +4,6 @@ import org.junit.platform.suite.api.Suite;
 
 
 @Suite
-@SelectPackages({"BookingApp","Flights","CustomLogger"})
+@SelectPackages({"BookingApp","Flights","CustomLogger","table"})
 public class AllClassesSuite {
 }
